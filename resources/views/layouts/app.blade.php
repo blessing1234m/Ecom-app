@@ -7,13 +7,16 @@
     <title>@yield('title', 'Ecom-App')</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('images/logo.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/logo.jpg') }}">
 
     <!-- Vite CSS -->
     @vite(['resources/css/app.css'])
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
 </head>
 
-<body class="bg-gray-50">
+<body class="bg-gray-100">
     <!-- Header -->
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <div class="container mx-auto px-4 py-4">
@@ -21,7 +24,7 @@
                 <!-- Logo -->
                 <div class="flex items-center space-x-4">
                     <a href="{{ route('home') }}" class="flex items-center space-x-2">
-                        <img src="{{ asset('images/logo.png') }}" alt="Ecom-App Logo" class="h-10 w-auto">
+                        <img src="{{ asset('images/logo.jpg') }}" alt="Ecom-App Logo" class="h-10 w-auto">
                         <span class="text-xl font-bold text-gray-800">Ecom-App</span>
                     </a>
                 </div>
@@ -101,13 +104,16 @@
                 </div>
             </div>
             <div class="border-t border-gray-700 mt-8 pt-8 text-center">
-                <p>&copy; 2024 Ecom-App. Tous droits réservés.</p>
+                <p>&copy; 2025 Ecom-App. Tous droits réservés.</p>
             </div>
         </div>
     </footer>
 
     <!-- Vite JS -->
     @vite(['resources/js/app.js'])
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
     <script>
     // Mobile Menu Toggle

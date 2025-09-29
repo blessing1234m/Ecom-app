@@ -8,20 +8,25 @@
         <div class="swiper banner-swiper h-full">
             <div class="swiper-wrapper">
                 @foreach ($banners as $banner)
-                    <div class="swiper-slide">
-                        <div class="relative h-full bg-gray-200">
-                            <div class="absolute inset-0 bg-black bg-opacity-40"></div>
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="text-center text-white px-4">
-                                    <h1 class="text-4xl font-bold mb-4">{{ $banner->title }}</h1>
-                                    <p class="text-lg mb-6">{{ $banner->description }}</p>
-                                    @if ($banner->button_text)
-                                        <a href="{{ $banner->button_link }}"
-                                            class="inline-block bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition">
-                                            {{ $banner->button_text }}
-                                        </a>
-                                    @endif
-                                </div>
+                    <div class="swiper-slide h-96 relative">
+                        @if ($banner->image)
+                            <img src="{{ Storage::url($banner->image) }}"
+                                 alt="{{ $banner->title }}"
+                                 class="absolute inset-0 w-full h-full object-cover z-0" />
+                        @else
+                            <div class="absolute inset-0 bg-gray-200"></div>
+                        @endif
+                        <div class="absolute inset-0 bg-black bg-opacity-40 z-10"></div>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center z-20 px-4">
+                            <div class="text-center text-white max-w-2xl mx-auto">
+                                <h1 class="text-4xl font-bold mb-4">{{ $banner->title }}</h1>
+                                <p class="text-lg mb-6">{{ $banner->description }}</p>
+                                @if ($banner->button_text)
+                                    <a href="{{ $banner->button_link }}"
+                                       class="inline-block bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition mx-auto">
+                                        {{ $banner->button_text }}
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     </div>
