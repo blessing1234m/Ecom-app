@@ -21,8 +21,7 @@ class AdminMiddleware
 
     private function isAdmin(Request $request): bool
     {
-        // Solution temporaire - vous pouvez changer le mot de passe
-        return $request->get('admin_key') === 'ecom2024' ||
-               session()->get('is_admin') === true;
+        // Vérifier la session admin
+        return session()->get('is_admin') === true;
     }
 }

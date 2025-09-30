@@ -11,6 +11,46 @@
 
     <!-- Vite CSS -->
     @vite(['resources/css/app.css'])
+
+    <script src="//unpkg.com/alpinejs" defer></script>
+
+    <style>
+        .admin-dropdown {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            border-radius: 0.75rem;
+            border: 1px solid #e5e7eb;
+            background: #fff;
+            min-width: 200px;
+            padding: 0.5rem 0;
+            transition: box-shadow 0.2s;
+        }
+
+        .admin-dropdown a,
+        .admin-dropdown button {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 0.95rem;
+            color: #374151;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .admin-dropdown a:hover,
+        .admin-dropdown button:hover {
+            background: #f3f4f6;
+            color: #ea580c;
+            /* orange-600 */
+        }
+
+        .admin-dropdown svg {
+            margin-right: 0.5rem;
+            color: #ea580c;
+        }
+    </style>
 </head>
 
 <body class="bg-gray-100">
@@ -56,15 +96,42 @@
                         target="_blank">
                         Voir le site
                     </a>
-                    <form action="{{ route('admin.logout') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="text-gray-600 hover:text-primary-600 transition text-sm">
-                            Déconnexion
+                    <!-- Menu déroulant profil -->
+                    <div class="relative" x-data="{ open: false }">
+                        <button @click="open = !open"
+                            class="flex items-center text-sm text-gray-600 hover:text-primary-600 transition focus:outline-none">
+                            <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                            Admin
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
                         </button>
-                    </form>
+
+                        <!-- Menu déroulant -->
+                        <div x-show="open" @click.away="open = false"
+                            class="admin-dropdown absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200">
+                            <a href="{{ route('admin.profile.edit') }}"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition">
+                                <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                </svg>
+                                Changer le mot de passe
+                            </a>
+                            <form action="{{ route('admin.logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="text-gray-600 hover:text-primary-600 transition text-sm">
+                                    Déconnexion
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
     </header>
 
     <!-- Mobile menu button -->

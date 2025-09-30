@@ -52,9 +52,9 @@
                 </button>
             </div>
 
-            <div class="text-center text-sm text-gray-500">
-                <p>Mot de passe temporaire: <code>admin123</code></p>
-            </div>
+            {{-- <div class="text-center text-sm text-gray-500">
+                <p>Mot de passe temporaire: <code>admin1234</code></p>
+            </div> --}}
         </form>
     </div>
 </body>

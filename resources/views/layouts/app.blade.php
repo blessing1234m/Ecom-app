@@ -32,11 +32,11 @@
                 <!-- Navigation Desktop -->
                 <nav class="hidden md:flex space-x-8">
                     <a href="{{ route('home') }}"
-                        class="text-white hover:text-primary-600 transition {{ request()->routeIs('home') ? 'text-primary-600 font-bold' : '' }}">ACCUEIL</a>
+                        class="text-white font-bold  hover:text-primary-600 transition {{ request()->routeIs('home') ? 'text-primary font-bold' : '' }}">ACCUEIL</a>
                     <a href="{{ route('products.index') }}"
-                        class="text-white hover:text-primary-600 transition {{ request()->routeIs('products.*') ? 'text-primary-600 font-bold' : '' }}">BOUTIQUE</a>
+                        class="text-white font-bold hover:text-primary-600 transition {{ request()->routeIs('products.*') ? 'text-primary font-bold' : '' }}">BOUTIQUE</a>
                     <a href="{{ route('cart.index') }}"
-                        class="text-white hover:text-primary-600 transition {{ request()->routeIs('cart.*') ? 'text-primary-600 font-bold' : '' }}">VOTRE PANNIER</a>
+                        class="text-white font-bold hover:text-primary-600 transition {{ request()->routeIs('cart.*') ? 'text-primary font-bold' : '' }}">VOTRE PANNIER</a>
                 </nav>
 
                 <!-- Panier Icon -->

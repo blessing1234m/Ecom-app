@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function login()
+    public function login(): View
     {
         return view('admin.auth.login');
     }
@@ -19,8 +21,19 @@ class AuthController extends Controller
             'password' => 'required|string'
         ]);
 
-        // Mot de passe temporaire - à changer en production
-        if ($request->password === 'admin123') {
+        // Vérifier le mot de passe
+        $storedPassword = session('admin_password');
+        $defaultPassword = 'admin123';
+
+        if ($storedPassword) {
+            // Vérifier le mot de passe hashé
+            $isValid = Hash::check($request->password, $storedPassword);
+        } else {
+            // Vérifier le mot de passe par défaut
+            $isValid = Hash::check($request->password, Hash::make($defaultPassword));
+        }
+
+        if ($isValid) {
             session(['is_admin' => true]);
             return redirect()->route('admin.dashboard');
         }

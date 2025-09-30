@@ -4,11 +4,11 @@
 
 @section('content')
     <!-- Bannière Slideshow centrée et limitée en largeur -->
-    <section class="relative h-[550px] overflow-hidden max-w-7xl mx-auto my-8 rounded-xl shadow-lg border-4 border-orange-500">
+    <section class="relative h-[500px] overflow-hidden max-w-7xl mx-auto my-8 rounded-xl shadow-lg border-4 border-orange-500">
         <div class="swiper banner-swiper h-full">
             <div class="swiper-wrapper">
                 @foreach ($banners as $banner)
-                    <div class="swiper-slide h-[550px] relative">
+                    <div class="swiper-slide h-[500px] relative">
                         @if ($banner->image)
                             <img src="{{ Storage::url($banner->image) }}"
                                  alt="{{ $banner->title }}"
@@ -40,7 +40,7 @@
 
     <!-- Catégories -->
     <section class="container mx-auto px-4 py-12">
-        <h2 class="text-3xl font-bold text-center mb-8">Catégories</h2>
+        {{-- <h2 class="text-3xl font-bold text-center mb-8 ">Catégories</h2> --}}
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
             @foreach ($categories as $category)
                 <a href="{{ route('products.index', ['category' => $category->slug]) }}"

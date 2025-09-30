@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\BannerController as AdminBannerController;
 use App\Http\Controllers\Front\OrderPdfController;
+use App\Http\Controllers\Admin\ProfileController;
 
 use App\Http\Controllers\TestController;
 
@@ -102,6 +103,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::delete('/banners/{banner}', [AdminBannerController::class, 'destroy'])->name('banners.destroy');
     Route::patch('/banners/{banner}/status', [AdminBannerController::class, 'updateStatus'])->name('banners.update-status');
     Route::post('/banners/reorder', [AdminBannerController::class, 'reorder'])->name('banners.reorder');
+
+        // Profil admin
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.update-password');
 });
 });
 
