@@ -34,7 +34,7 @@
                     <a href="{{ route('home') }}"
                         class="text-white hover:text-primary-600 transition {{ request()->routeIs('home') ? 'text-primary-600 font-bold' : '' }}">ACCUEIL</a>
                     <a href="{{ route('products.index') }}"
-                        class="text-white hover:text-primary-600 transition {{ request()->routeIs('products.*') ? 'text-primary-600 font-bold' : '' }}">NOS PRODUITS</a>
+                        class="text-white hover:text-primary-600 transition {{ request()->routeIs('products.*') ? 'text-primary-600 font-bold' : '' }}">BOUTIQUE</a>
                     <a href="{{ route('cart.index') }}"
                         class="text-white hover:text-primary-600 transition {{ request()->routeIs('cart.*') ? 'text-primary-600 font-bold' : '' }}">VOTRE PANNIER</a>
                 </nav>

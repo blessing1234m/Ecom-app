@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\BannerController as AdminBannerController;
+use App\Http\Controllers\Front\OrderPdfController;
 
 use App\Http\Controllers\TestController;
 
@@ -103,3 +104,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/banners/reorder', [AdminBannerController::class, 'reorder'])->name('banners.reorder');
 });
 });
+
+// PDF des commandes
+Route::get('/orders/{order}/pdf/download', [OrderPdfController::class, 'download'])->name('orders.pdf.download');
+Route::get('/orders/{order}/pdf/view', [OrderPdfController::class, 'view'])->name('orders.pdf.view');
