@@ -67,7 +67,7 @@
                 <tr class="hover:bg-gray-50">
                     <td class="px-6 py-4 whitespace-nowrap">
                         <div class="flex items-center">
-                            {{-- <div class="flex-shrink-0 h-10 w-10">
+                            <div class="flex-shrink-0 h-10 w-10">
                                 @if($category->image)
                                 <img class="h-10 w-10 rounded-lg object-cover"
                                      src="{{ Storage::url($category->image) }}"
@@ -77,7 +77,7 @@
                                     <span class="text-gray-400 text-xs">No image</span>
                                 </div>
                                 @endif
-                            </div> --}}
+                            </div>
                             <div class="ml-4">
                                 <div class="text-sm font-medium text-gray-900">
                                     {{ $category->name }}

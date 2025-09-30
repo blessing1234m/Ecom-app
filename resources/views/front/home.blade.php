@@ -3,16 +3,16 @@
 @section('title', 'Accueil - Ecom-App')
 
 @section('content')
-    <!-- Bannière Slideshow -->
-    <section class="relative h-96 overflow-hidden">
+    <!-- Bannière Slideshow centrée et limitée en largeur -->
+    <section class="relative h-[550px] overflow-hidden max-w-7xl mx-auto my-8 rounded-xl shadow-lg border-4 border-orange-500">
         <div class="swiper banner-swiper h-full">
             <div class="swiper-wrapper">
                 @foreach ($banners as $banner)
-                    <div class="swiper-slide h-96 relative">
+                    <div class="swiper-slide h-[550px] relative">
                         @if ($banner->image)
                             <img src="{{ Storage::url($banner->image) }}"
                                  alt="{{ $banner->title }}"
-                                 class="absolute inset-0 w-full h-full object-cover z-0" />
+                                 class="absolute inset-0 w-full h-full object-cover object-center z-0" />
                         @else
                             <div class="absolute inset-0 bg-gray-200"></div>
                         @endif
@@ -128,7 +128,27 @@
 @endpush
 
 @push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script>
+        // Swiper initialization for the banner
+        document.addEventListener('DOMContentLoaded', function () {
+            new Swiper('.banner-swiper', {
+                loop: true,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: false,
+                },
+            });
+        });
+
         // Add to cart functionality
         document.querySelectorAll('.add-to-cart').forEach(button => {
             button.addEventListener('click', function() {

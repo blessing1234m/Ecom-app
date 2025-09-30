@@ -13,12 +13,12 @@
     @vite(['resources/css/app.css'])
 
     <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 </head>
 
 <body class="bg-gray-100">
     <!-- Header -->
-    <header class="bg-white shadow-sm sticky top-0 z-50">
+    <header class="bg-orange-500 shadow-sm sticky top-0 z-50">
         <div class="container mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
                 <!-- Logo -->
@@ -32,11 +32,11 @@
                 <!-- Navigation Desktop -->
                 <nav class="hidden md:flex space-x-8">
                     <a href="{{ route('home') }}"
-                        class="text-gray-600 hover:text-primary-600 transition {{ request()->routeIs('home') ? 'text-primary-600 font-semibold' : '' }}">Accueil</a>
+                        class="text-white hover:text-primary-600 transition {{ request()->routeIs('home') ? 'text-primary-600 font-bold' : '' }}">ACCUEIL</a>
                     <a href="{{ route('products.index') }}"
-                        class="text-gray-600 hover:text-primary-600 transition {{ request()->routeIs('products.*') ? 'text-primary-600 font-semibold' : '' }}">Produits</a>
+                        class="text-white hover:text-primary-600 transition {{ request()->routeIs('products.*') ? 'text-primary-600 font-bold' : '' }}">NOS PRODUITS</a>
                     <a href="{{ route('cart.index') }}"
-                        class="text-gray-600 hover:text-primary-600 transition {{ request()->routeIs('cart.*') ? 'text-primary-600 font-semibold' : '' }}">Panier</a>
+                        class="text-white hover:text-primary-600 transition {{ request()->routeIs('cart.*') ? 'text-primary-600 font-bold' : '' }}">VOTRE PANNIER</a>
                 </nav>
 
                 <!-- Panier Icon -->
@@ -52,7 +52,7 @@
                     </a>
 
                     <!-- Mobile menu button -->
-                    <button type="button" class="md:hidden text-gray-600 mobile-menu-button">
+                    <button type="button" class="md:hidden text-white mobile-menu-button">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M4 6h16M4 12h16M4 18h16" />
@@ -65,11 +65,11 @@
             <div class="md:hidden mobile-menu hidden mt-4 pb-4">
                 <nav class="flex flex-col space-y-4">
                     <a href="{{ route('home') }}"
-                        class="text-gray-600 hover:text-primary-600 transition {{ request()->routeIs('home') ? 'text-primary-600 font-semibold' : '' }}">Accueil</a>
+                        class="text-white hover:text-primary-600 transition {{ request()->routeIs('home') ? 'text-primary-600 font-semibold' : '' }}">Accueil</a>
                     <a href="{{ route('products.index') }}"
-                        class="text-gray-600 hover:text-primary-600 transition {{ request()->routeIs('products.*') ? 'text-primary-600 font-semibold' : '' }}">Produits</a>
+                        class="text-white hover:text-primary-600 transition {{ request()->routeIs('products.*') ? 'text-primary-600 font-semibold' : '' }}">Produits</a>
                     <a href="{{ route('cart.index') }}"
-                        class="text-gray-600 hover:text-primary-600 transition {{ request()->routeIs('cart.*') ? 'text-primary-600 font-semibold' : '' }}">Panier</a>
+                        class="text-white hover:text-primary-600 transition {{ request()->routeIs('cart.*') ? 'text-primary-600 font-semibold' : '' }}">Panier</a>
                 </nav>
             </div>
         </div>
@@ -89,7 +89,7 @@
                     <p class="text-gray-300">Votre boutique en ligne de confiance pour des produits de qualité.</p>
                 </div>
                 <div>
-                    <h3 class="text-lg font-semibold mb-4">Liens Rapides</h3>
+                    <h3 class="text-lg font-semibold mb-4 text-orange-500">Liens Rapides</h3>
                     <ul class="space-y-2">
                         <li><a href="{{ route('home') }}" class="text-gray-300 hover:text-white transition">Accueil</a>
                         </li>
@@ -98,7 +98,7 @@
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-lg font-semibold mb-4">Contact</h3>
+                    <h3 class="text-lg font-semibold mb-4 text-orange-500">Contact</h3>
                     <p class="text-gray-300">Email: contact@ecom-app.tg</p>
                     <p class="text-gray-300">Téléphone: +228 XX XX XX XX</p>
                 </div>
@@ -116,24 +116,24 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
     <script>
-    // Mobile Menu Toggle
-    document.querySelector('.mobile-menu-button').addEventListener('click', function() {
-        document.querySelector('.mobile-menu').classList.toggle('hidden');
-    });
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu-button').addEventListener('click', function() {
+            document.querySelector('.mobile-menu').classList.toggle('hidden');
+        });
 
-    // Update cart count on page load
-    function updateCartCount() {
-        fetch('{{ route("cart.count") }}')
-            .then(response => response.json())
-            .then(data => {
-                document.querySelector('.cart-count').textContent = data.total_items;
-            });
-    }
+        // Update cart count on page load
+        function updateCartCount() {
+            fetch('{{ route('cart.count') }}')
+                .then(response => response.json())
+                .then(data => {
+                    document.querySelector('.cart-count').textContent = data.total_items;
+                });
+        }
 
-    // Initialize cart count
-    document.addEventListener('DOMContentLoaded', function() {
-        updateCartCount();
-    });
+        // Initialize cart count
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();
+        });
     </script>
 
     @stack('scripts')
