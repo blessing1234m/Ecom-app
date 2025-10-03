@@ -18,7 +18,7 @@
 
 <body class="bg-gray-100">
     <!-- Header -->
-    <header class="bg-orange-500 shadow-sm sticky top-0 z-50">
+    <header class="bg-white shadow-sm sticky top-0 z-50">
         <div class="container mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
                 <!-- Logo -->
@@ -32,11 +32,11 @@
                 <!-- Navigation Desktop -->
                 <nav class="hidden md:flex space-x-8">
                     <a href="{{ route('home') }}"
-                        class="text-white font-bold  hover:text-primary-600 transition {{ request()->routeIs('home') ? 'text-primary font-bold' : '' }}">ACCUEIL</a>
+                        class="text-black font-bold  hover:text-primary-600 transition {{ request()->routeIs('home') ? 'text-primary font-bold' : '' }}">ACCUEIL</a>
                     <a href="{{ route('products.index') }}"
-                        class="text-white font-bold hover:text-primary-600 transition {{ request()->routeIs('products.*') ? 'text-primary font-bold' : '' }}">BOUTIQUE</a>
+                        class="text-black font-bold hover:text-primary-600 transition {{ request()->routeIs('products.*') ? 'text-primary font-bold' : '' }}">BOUTIQUE</a>
                     <a href="{{ route('cart.index') }}"
-                        class="text-white font-bold hover:text-primary-600 transition {{ request()->routeIs('cart.*') ? 'text-primary font-bold' : '' }}">VOTRE PANNIER</a>
+                        class="text-black font-bold hover:text-primary-600 transition {{ request()->routeIs('cart.*') ? 'text-primary font-bold' : '' }}">VOTRE PANNIER</a>
                 </nav>
 
                 <!-- Panier Icon -->

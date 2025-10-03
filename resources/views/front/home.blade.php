@@ -4,11 +4,11 @@
 
 @section('content')
     <!-- Bannière Slideshow centrée et limitée en largeur -->
-    <section class="relative h-[500px] overflow-hidden max-w-7xl mx-auto my-8 rounded-xl shadow-lg border-4 border-orange-500">
+    <section class="relative h-[400px] overflow-hidden max-w-7xl mx-auto my-8 rounded-xl shadow-lg border-4 ">
         <div class="swiper banner-swiper h-full">
             <div class="swiper-wrapper">
                 @foreach ($banners as $banner)
-                    <div class="swiper-slide h-[500px] relative">
+                    <div class="swiper-slide h-[400px] relative">
                         @if ($banner->image)
                             <img src="{{ Storage::url($banner->image) }}"
                                  alt="{{ $banner->title }}"
