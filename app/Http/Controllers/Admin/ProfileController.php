@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\AdminSetting;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -23,28 +24,16 @@ class ProfileController extends Controller
         ]);
 
         // Vérifier le mot de passe actuel
-        $currentPassword = config('app.admin_password', 'admin123');
-
-        if (!Hash::check($request->current_password, Hash::make($currentPassword))) {
+        if (!AdminSetting::verifyPassword($request->current_password)) {
             return back()->withErrors([
                 'current_password' => 'Le mot de passe actuel est incorrect.'
             ]);
         }
 
-        // Mettre à jour le mot de passe dans le fichier .env ou la configuration
-        $this->updateAdminPassword($request->new_password);
+        // Mettre à jour le mot de passe
+        AdminSetting::updatePassword($request->new_password);
 
         return redirect()->route('admin.dashboard')
                          ->with('success', 'Mot de passe mis à jour avec succès!');
-    }
-
-    private function updateAdminPassword(string $newPassword): void
-    {
-        // Pour une solution simple, nous stockons le mot de passe dans la session
-        // En production, vous voudrez peut-être le stocker dans la base de données
-        session(['admin_password' => Hash::make($newPassword)]);
-
-        // Optionnel: Vous pouvez aussi mettre à jour un fichier de configuration
-        // ou utiliser la base de données pour stocker le mot de passe admin
     }
 }

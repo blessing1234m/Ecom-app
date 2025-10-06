@@ -16,22 +16,20 @@ class ProductController extends Controller
             ->where('is_active', true)
             ->where('stock', '>', 0);
 
-        // Filter by category
+        // Recherche uniquement par nom de produit
+        if ($request->has('search') && $request->search) {
+            $searchTerm = $request->search;
+            $query->where('name', 'like', '%' . $searchTerm . '%');
+        }
+
+        // Filtre par catégorie
         if ($request->has('category') && $request->category) {
             $query->whereHas('category', function($q) use ($request) {
                 $q->where('slug', $request->category);
             });
         }
 
-        // Filter by search
-        if ($request->has('search') && $request->search) {
-            $query->where(function($q) use ($request) {
-                $q->where('name', 'like', '%' . $request->search . '%')
-                  ->orWhere('description', 'like', '%' . $request->search . '%');
-            });
-        }
-
-        // Filter by price range
+        // Filtre par prix
         if ($request->has('min_price') && $request->min_price) {
             $query->where('price', '>=', $request->min_price);
         }
@@ -40,7 +38,7 @@ class ProductController extends Controller
             $query->where('price', '<=', $request->max_price);
         }
 
-        // Sorting
+        // Tri
         $sort = $request->get('sort', 'latest');
         switch ($sort) {
             case 'price_asc':
@@ -65,7 +63,7 @@ class ProductController extends Controller
 
     public function show(Product $product): View
     {
-        // Check if product is active and in stock
+        // Vérifier si le produit est actif et en stock
         if (!$product->is_active || $product->stock <= 0) {
             abort(404);
         }
