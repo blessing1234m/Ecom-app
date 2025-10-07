@@ -38,10 +38,10 @@
         <div class="text-2xl font-bold text-blue-700">{{ $orderStats['confirmed'] }}</div>
         <div class="text-sm text-blue-600">Confirmées</div>
     </div>
-    <div class="bg-indigo-50 p-4 rounded-lg shadow text-center border border-indigo-200">
+    {{-- <div class="bg-indigo-50 p-4 rounded-lg shadow text-center border border-indigo-200">
         <div class="text-2xl font-bold text-indigo-700">{{ $orderStats['processing'] }}</div>
         <div class="text-sm text-indigo-600">En traitement</div>
-    </div>
+    </div> --}}
     <div class="bg-purple-50 p-4 rounded-lg shadow text-center border border-purple-200">
         <div class="text-2xl font-bold text-purple-700">{{ $orderStats['shipped'] }}</div>
         <div class="text-sm text-purple-600">Expédiées</div>
@@ -171,7 +171,7 @@
                                     class="text-xs font-medium rounded-full px-3 py-1 border-0 focus:ring-2 focus:ring-primary-500 {{ $order->status_color }}">
                                 <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>En attente</option>
                                 <option value="confirmed" {{ $order->status == 'confirmed' ? 'selected' : '' }}>Confirmée</option>
-                                <option value="processing" {{ $order->status == 'processing' ? 'selected' : '' }}>En traitement</option>
+                                {{-- <option value="processing" {{ $order->status == 'processing' ? 'selected' : '' }}>En traitement</option> --}}
                                 <option value="shipped" {{ $order->status == 'shipped' ? 'selected' : '' }}>Expédiée</option>
                                 <option value="delivered" {{ $order->status == 'delivered' ? 'selected' : '' }}>Livrée</option>
                                 <option value="cancelled" {{ $order->status == 'cancelled' ? 'selected' : '' }}>Annulée</option>

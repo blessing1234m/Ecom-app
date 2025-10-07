@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Faq;
 use Illuminate\View\View;
-
 
 class HomeController extends Controller
 {
@@ -23,6 +23,8 @@ class HomeController extends Controller
             ->take(8)
             ->get();
 
-        return view('front.home', compact('banners', 'categories', 'featuredProducts'));
+        $faqs = Faq::getActiveFAQs();
+
+        return view('front.home', compact('banners', 'categories', 'featuredProducts', 'faqs'));
     }
 }

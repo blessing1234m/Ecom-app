@@ -120,6 +120,121 @@
                 Voir tous les produits
             </a>
         </div>
+        {{-- ... le code existant des bannières, catégories et produits populaires ... --}}
+
+<!-- Section FAQ -->
+@if($faqs->count() > 0)
+<section class="container mx-auto px-4 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+        <!-- Colonne gauche : Titre et bouton -->
+        <div>
+            <h2 class="text-3xl font-bold text-orange-500 mb-4">FAQ</h2>
+            <h3 class="text-4xl font-bold text-gray-900 mb-6">Vous avez une question?<br>nous avons la réponse</h3>
+            <p class="text-lg text-gray-700 mb-8">
+                Nous savons que vous avez des question pertinentes concernant nos produits et services, pour cela nous avons pioché pour vous les plus essentielles pour vous, ou sinon vous pourrez toujours nous envoyer la vôtre par courriel.
+            </p>
+            {{-- <a href="mailto:contact@ecom-app.tg"
+               class="inline-flex items-center justify-center px-8 py-4 bg-orange-500 text-white text-xl font-semibold rounded-lg hover:bg-orange-600 transition">
+                Nous écrire
+                <svg class="w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+            </a> --}}
+        </div>
+        <!-- Colonne droite : FAQ -->
+        <div class="bg-white rounded-xl border border-primary p-8">
+            @foreach($faqs as $index => $faq)
+                <div class="mb-6">
+                    <button class="w-full text-left flex justify-between items-center text-lg font-medium text-primary focus:outline-none faq-question"
+                            data-faq-index="{{ $index }}">
+                        <span>{{ $faq->question }}</span>
+                        <svg class="w-6 h-6 text-gray-500 transition-transform faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="faq-answer text-gray-500 mt-2 hidden">
+                        {{ $faq->answer }}
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+@endif
+
+@push('styles')
+<style>
+    .faq-item {
+        transition: all 0.3s ease;
+    }
+
+    .faq-item:hover {
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    .faq-question {
+        transition: background-color 0.2s ease;
+    }
+
+    .faq-answer {
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+@endpush
+
+@push('scripts')
+<script>
+    // FAQ Accordion functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const answer = this.parentElement.querySelector('.faq-answer');
+                const icon = this.querySelector('.faq-icon');
+                const isOpen = !answer.classList.contains('hidden');
+
+                // Ferme toutes les réponses
+                document.querySelectorAll('.faq-answer').forEach(a => a.classList.add('hidden'));
+                document.querySelectorAll('.faq-icon').forEach(i => i.classList.remove('rotate-180'));
+
+                // Si déjà ouvert, on ferme (donc rien à faire)
+                // Sinon, on ouvre celui cliqué
+                if (!isOpen) {
+                    answer.classList.remove('hidden');
+                    icon.classList.add('rotate-180');
+                }
+            });
+        });
+
+        // Open first FAQ by default
+        if (faqQuestions.length > 0) {
+            faqQuestions[0].click();
+        }
+    });
+
+    // Smooth scroll to FAQ section
+    function scrollToFAQ() {
+        const faqSection = document.getElementById('faq-accordion');
+        if (faqSection) {
+            faqSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    }
+</script>
+@endpush
     </section>
 @endsection
 
