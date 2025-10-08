@@ -64,3 +64,70 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+# Ecom-App
+
+Ecom-App est une application e-commerce développée avec Laravel. Elle permet la gestion complète d’une boutique en ligne : affichage des produits, gestion du panier, commandes, FAQ, et administration.
+
+## Fonctionnalités
+
+- **Catalogue produits** : navigation, recherche, filtres, affichage par catégories.
+- **Panier** : ajout, modification, suppression d’articles, synchronisation front/back.
+- **Commandes** : passage de commande, suivi, gestion des statuts.
+- **FAQ** : affichage des questions/réponses, gestion par l’admin.
+- **Espace admin** : gestion des produits, catégories, bannières, commandes, FAQ.
+- **Bannières** : slideshow avec navigation et personnalisation.
+- **Responsive** : interface adaptée mobile et desktop.
+
+## Installation
+
+1. Clonez le dépôt :
+   ```
+   git clone https://github.com/blessing1234m/Ecom-app.git
+   cd ecom-app
+   ```
+2. Installez les dépendances :
+   ```
+   composer install
+   npm install && npm run build
+   ```
+3. Configurez `.env` et la base de données.
+4. Lancez les migrations :
+   ```
+   php artisan migrate --seed
+   ```
+5. Démarrez le serveur :
+   ```
+   php artisan serve
+   ```
+
+## Utilisation
+
+- Accédez à la boutique : `/products`
+- Accédez au pannier : `/cart`
+- Accédez à l’espace admin : `/admin/login` (mot de passe par défaut : `admin12345`)
+- Gérez les produits, catégories, commandes, FAQ, bannières depuis l’admin.
+
+## Technologies
+
+- **Laravel** (backend)
+- **Blade** (templates)
+- **Tailwind CSS** (design)
+- **Swiper.js** (slideshow)
+- **Alpine.js** (interactions simples)
+- **MySQL** (base de données)
+
+## Personnalisation
+
+- Modifiez les fichiers Blade dans `resources/views`.
+- Ajoutez vos produits et catégories via l’admin.
+- Personnalisez les bannières et la FAQ.
+
+## Contribution
+
+Les contributions sont les bienvenues !  
+Forkez le projet, ouvrez une issue ou une pull request.
+
+## Licence
+
+MIT
