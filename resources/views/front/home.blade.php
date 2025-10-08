@@ -264,12 +264,11 @@
             });
         });
 
-        // Add to cart functionality
-        document.querySelectorAll('.add-to-cart').forEach(button => {
-            button.addEventListener('click', function() {
-                const productId = this.dataset.productId;
-
-                fetch('{{ route('cart.add') }}', {
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.onclick = function() {
+                    const productId = this.dataset.productId;
+                    fetch('{{ route('cart.add') }}', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -291,23 +290,28 @@
                         console.error('Error:', error);
                         showNotification('Erreur lors de l\'ajout au panier', 'error');
                     });
+                }
             });
+
+            function updateCartCount() {
+                fetch('{{ route("cart.count") }}')
+                    .then(response => response.json())
+                    .then(data => {
+                        document.querySelectorAll('.cart-count').forEach(element => {
+                            element.textContent = data.total_items;
+                        });
+                    });
+            }
+
+            function showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.className = `fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg text-white ${
+                    type === 'success' ? 'bg-green-500' : type === 'error' ? 'bg-red-500' : 'bg-blue-500'
+                }`;
+                notification.textContent = message;
+                document.body.appendChild(notification);
+                setTimeout(() => notification.remove(), 3000);
+            }
         });
-
-        function showNotification(message, type = 'info') {
-            // Create notification element
-            const notification = document.createElement('div');
-            notification.className = `fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg text-white ${
-            type === 'success' ? 'bg-green-500' : type === 'error' ? 'bg-red-500' : 'bg-blue-500'
-        }`;
-            notification.textContent = message;
-
-            document.body.appendChild(notification);
-
-            // Remove after 3 seconds
-            setTimeout(() => {
-                notification.remove();
-            }, 3000);
-        }
     </script>
 @endpush

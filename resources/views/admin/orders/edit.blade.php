@@ -42,7 +42,10 @@
                     </select>
                     <input type="number" name="items[{{ $item->id }}][quantity]" value="{{ $item->quantity }}"
                            min="1" class="w-20 border rounded px-2 py-1">
-                    <button type="button" class="text-red-600 remove-item" data-id="{{ $item->id }}">Supprimer</button>
+                    <label class="flex items-center text-red-600 font-semibold">
+                        <input type="checkbox" name="items[{{ $item->id }}][delete]" value="1" class="mr-1">
+                        Supprimer
+                    </label>
                 </div>
             @endforeach
         </div>

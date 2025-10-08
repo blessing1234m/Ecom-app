@@ -89,20 +89,29 @@ class OrderController extends Controller
             foreach ($request->items as $itemId => $data) {
                 $orderItem = $order->items()->find($itemId);
                 if ($orderItem) {
-                    $orderItem->update([
-                        'product_id' => $data['product_id'],
-                        'quantity' => $data['quantity'],
-                    ]);
+                    if (isset($data['delete']) && $data['delete']) {
+                        $orderItem->delete();
+                    } else {
+                        $orderItem->update([
+                            'product_id' => $data['product_id'],
+                            'quantity' => $data['quantity'],
+                        ]);
+                    }
                 }
             }
         }
 
         // Ajout d'un nouvel article
         if ($request->filled('new_product_id') && $request->filled('new_quantity')) {
-            $order->items()->create([
-                'product_id' => $request->new_product_id,
-                'quantity' => $request->new_quantity,
-            ]);
+            $product = \App\Models\Product::find($request->new_product_id);
+            if ($product) {
+                $order->items()->create([
+                    'product_id' => $product->id,
+                    'quantity' => $request->new_quantity,
+                    'unit_price' => $product->price, // Ajoute le prix du produit
+                    'total_price' => $product->price * $request->new_quantity,
+                ]);
+            }
         }
 
         // Suppression d'un article (optionnel, à gérer côté JS ou via une case à cocher)

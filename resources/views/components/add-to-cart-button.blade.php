@@ -8,10 +8,10 @@
     document.addEventListener('DOMContentLoaded', function() {
         // Add to cart functionality
         document.querySelectorAll('.add-to-cart').forEach(button => {
-            button.addEventListener('click', function() {
+            button.onclick = function() {
                 const productId = this.dataset.productId;
 
-                fetch('{{ route("cart.add") }}', {
+                fetch('{{ route('cart.add') }}', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -33,7 +33,7 @@
                     console.error('Error:', error);
                     showNotification('Erreur lors de l\'ajout au panier', 'error');
                 });
-            });
+            }
         });
 
         function updateCartCount() {

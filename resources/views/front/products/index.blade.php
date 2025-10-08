@@ -4,32 +4,22 @@
 
 @section('content')
 <div class="container mx-auto px-4 py-8">
-    <!-- Résultats de recherche -->
-    @if(request('search'))
-    <div class="mb-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
-        <div class="flex items-center justify-between">
-            <div class="flex items-center">
-                <svg class="h-5 w-5 text-blue-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                </svg>
-                <span class="text-blue-800">
-                    Produits trouvés pour : "<strong>{{ request('search') }}</strong>"
-                </span>
-            </div>
-            <a href="{{ route('products.index') }}" class="text-blue-600 hover:text-blue-800 text-sm">
-                Voir tous les produits
-            </a>
-        </div>
-    </div>
-    @endif
-
     <div class="flex flex-col lg:flex-row gap-8">
-        <!-- Filtres Sidebar -->
+        <!-- Sidebar Filters -->
         <div class="lg:w-1/4">
             <div class="bg-white rounded-lg shadow-md p-6 sticky top-24">
                 <h3 class="text-lg font-semibold mb-4">Filtres</h3>
 
-                <!-- Catégories -->
+                <!-- Search -->
+                <div class="mb-6">
+                    <form action="{{ route('products.index') }}" method="GET">
+                        <input type="text" name="search" value="{{ request('search') }}"
+                               placeholder="Rechercher..."
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500">
+                    </form>
+                </div>
+
+                <!-- Categories -->
                 <div class="mb-6">
                     <h4 class="font-medium mb-3">Catégories</h4>
                     <div class="space-y-2">
@@ -40,13 +30,35 @@
                         @foreach($categories as $category)
                         <a href="{{ route('products.index', ['category' => $category->slug]) }}"
                            class="block text-gray-600 hover:text-primary-600 transition {{ request('category') == $category->slug ? 'text-primary-600 font-medium' : '' }}">
-                            {{ $category->name }}
+                            {{ $category->name }} ({{ $category->products_count }})
                         </a>
                         @endforeach
                     </div>
                 </div>
 
-                <!-- Effacer les filtres -->
+                <!-- Price Range -->
+                <div class="mb-6">
+                    <h4 class="font-medium mb-3">Prix</h4>
+                    <form action="{{ route('products.index') }}" method="GET">
+                        @if(request('category'))
+                        <input type="hidden" name="category" value="{{ request('category') }}">
+                        @endif
+                        @if(request('search'))
+                        <input type="hidden" name="search" value="{{ request('search') }}">
+                        @endif
+                        <div class="flex gap-2 mb-2">
+                            <input type="number" name="min_price" value="{{ request('min_price') }}"
+                                   placeholder="Min" class="w-1/2 px-2 py-1 border border-gray-300 rounded text-sm">
+                            <input type="number" name="max_price" value="{{ request('max_price') }}"
+                                   placeholder="Max" class="w-1/2 px-2 py-1 border border-gray-300 rounded text-sm">
+                        </div>
+                        <button type="submit" class="w-full bg-primary-500 text-white py-2 rounded hover:bg-primary-600 transition text-sm">
+                            Appliquer
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Clear Filters -->
                 @if(request()->anyFilled(['category', 'search', 'min_price', 'max_price']))
                 <a href="{{ route('products.index') }}" class="block text-center text-gray-600 hover:text-primary-600 transition text-sm">
                     Effacer les filtres
@@ -55,16 +67,16 @@
             </div>
         </div>
 
-        <!-- Grille des produits -->
+        <!-- Products Grid -->
         <div class="lg:w-3/4">
-            <!-- En-tête -->
+            <!-- Header -->
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
                 <div>
                     <h1 class="text-2xl font-bold text-gray-800">Nos Produits</h1>
                     <p class="text-gray-600">{{ $products->total() }} produit(s) trouvé(s)</p>
                 </div>
 
-                <!-- Tri -->
+                <!-- Sort -->
                 <form action="{{ route('products.index') }}" method="GET" class="flex items-center gap-2">
                     @if(request('category'))
                     <input type="hidden" name="category" value="{{ request('category') }}">
@@ -82,7 +94,7 @@
                 </form>
             </div>
 
-            <!-- Produits -->
+            <!-- Products -->
             @if($products->count() > 0)
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach($products as $product)
@@ -159,41 +171,32 @@
 
 @push('scripts')
 <script>
-    // Fonctionnalité d'ajout au panier
     document.querySelectorAll('.add-to-cart').forEach(button => {
         button.addEventListener('click', function() {
-            const product = {
-                id: this.dataset.productId,
-                name: this.dataset.productName,
-                price: parseFloat(this.dataset.productPrice),
-                image: this.dataset.productImage,
-                quantity: 1
-            };
-
-            addToCart(product);
-            updateCartCount();
-
-            // Message de succès
-            showNotification('Produit ajouté au panier !', 'success');
+            const productId = this.dataset.productId;
+            fetch('{{ route('cart.add') }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({
+                    product_id: productId,
+                    quantity: 1
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    updateCartCount();
+                    showNotification('Produit ajouté au panier !', 'success');
+                }
+            });
         });
     });
 
-    function addToCart(product) {
-        let cart = JSON.parse(localStorage.getItem('ecom-cart') || '[]');
-
-        const existingItem = cart.find(item => item.id === product.id);
-
-        if (existingItem) {
-            existingItem.quantity += 1;
-        } else {
-            cart.push(product);
-        }
-
-        localStorage.setItem('ecom-cart', JSON.stringify(cart));
-    }
-
     function showNotification(message, type = 'info') {
-        // Créer l'élément de notification
+        // Create notification element
         const notification = document.createElement('div');
         notification.className = `fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg text-white ${
             type === 'success' ? 'bg-green-500' : 'bg-blue-500'
@@ -202,7 +205,7 @@
 
         document.body.appendChild(notification);
 
-        // Supprimer après 3 secondes
+        // Remove after 3 seconds
         setTimeout(() => {
             notification.remove();
         }, 3000);
