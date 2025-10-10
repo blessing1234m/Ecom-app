@@ -15,9 +15,9 @@
                     <span class="mx-2">•</span> --}}
                     <span>{{ $blog->created_at->format('F d, Y') }}</span>
                 </p>
-    <div class="prose prose-lg text-gray-800">
-        {!! $blog->content !!}
-    </div>
+    <pre class="prose prose-lg text-gray-800" style="background:none;border:none;padding:0;font-family:inherit;white-space:pre-wrap;word-break:break-word;">
+{{ $blog->content }}
+    </pre>
     <a href="{{ route('blogs.index') }}" class="inline-block mt-8 text-orange-600 hover:underline">← Retour au blog</a>
 </div>
 @endsection

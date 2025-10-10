@@ -19,7 +19,9 @@
                     <span class="mx-2">•</span> --}}
                     <span>{{ $blog->created_at->format('F d, Y') }}</span>
                 </p>
-                <p class="text-gray-600 mb-4">{{ Str::limit(strip_tags($blog->content), 120) }}</p>
+                <p class="text-gray-600 mb-4" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis; display:block;">
+                    {{ Str::limit(strip_tags($blog->content), 120) }}
+                </p>
                 <a href="{{ route('blogs.show', $blog) }}"
                    class="mt-auto inline-block text-orange-600 hover:underline font-semibold">Lire l'article</a>
             </div>
