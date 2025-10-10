@@ -92,6 +92,10 @@
                         class="text-gray-600 hover:text-primary-600 transition {{ request()->routeIs('admin.faqs.*') ? 'text-primary-600 font-semibold' : '' }}">
                         FAQ
                     </a>
+                    <a href="{{ route('admin.blogs.index') }}"
+                        class="text-gray-600 hover:text-primary-600 transition {{ request()->routeIs('admin.blogs.*') ? 'text-primary-600 font-semibold' : '' }}">
+                        Blog
+                    </a>
                 </nav>
 
                 <!-- User Menu -->
@@ -164,6 +168,10 @@
                 <a href="{{ route('admin.banners.index') }}"
                     class="text-gray-600 hover:text-primary-600 transition py-2 {{ request()->routeIs('admin.banners.*') ? 'text-primary-600 font-semibold' : '' }}">
                     Bannières
+                </a>
+                <a href="{{ route('admin.blogs.index') }}"
+                    class="text-gray-600 hover:text-primary-600 transition py-2 {{ request()->routeIs('admin.blogs.*') ? 'text-primary-600 font-semibold' : '' }}">
+                    Blog
                 </a>
             </nav>
         </div>

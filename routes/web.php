@@ -14,8 +14,9 @@ use App\Http\Controllers\Admin\BannerController as AdminBannerController;
 use App\Http\Controllers\Front\OrderPdfController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\FaqController;
-
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\Front\BlogController;
+use App\Http\Controllers\Admin\BlogController as AdminblogController;
 
 
 /*
@@ -62,13 +63,14 @@ Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.sh
 
 // Routes Admin
 Route::prefix('admin')->name('admin.')->group(function () {
-    // Authentication
+    // Auth routes accessibles sans authentification
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/login', [AuthController::class, 'authenticate'])->name('authenticate');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-    // Protected routes
+    // Routes protégées
     Route::middleware('admin')->group(function () {
+        // Dashboard
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
         // Produits
@@ -118,9 +120,22 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/faqs/{faq}/edit', [FaqController::class, 'edit'])->name('faqs.edit');
         Route::put('/faqs/{faq}', [FaqController::class, 'update'])->name('faqs.update');
         Route::delete('/faqs/{faq}', [FaqController::class, 'destroy'])->name('faqs.destroy');
+
+        // Blog Admin Routes
+        Route::get('/blogs', [AdminblogController::class, 'index'])->name('blogs.index');
+        Route::get('/blogs/create', [AdminblogController::class, 'create'])->name('blogs.create');
+        Route::post('/blogs', [AdminblogController::class, 'store'])->name('blogs.store');
+        Route::get('/blogs/{blog}/edit', [AdminblogController::class, 'edit'])->name('blogs.edit');
+        Route::put('/blogs/{blog}', [AdminblogController::class, 'update'])->name('blogs.update');
+        Route::delete('/blogs/{blog}', [AdminblogController::class, 'destroy'])->name('blogs.destroy');
+        Route::get('/blogs/{blog}', [AdminblogController::class, 'show'])->name('blogs.show');
     });
 });
 
 // PDF des commandes
 Route::get('/orders/{order}/pdf/download', [OrderPdfController::class, 'download'])->name('orders.pdf.download');
 Route::get('/orders/{order}/pdf/view', [OrderPdfController::class, 'view'])->name('orders.pdf.view');
+
+// Blog public routes
+Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
+Route::get('/blogs/{blog}', [BlogController::class, 'show'])->name('blogs.show');

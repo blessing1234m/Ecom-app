@@ -61,9 +61,9 @@ class ProductController extends Controller
             'stock' => 'required|integer|min:0',
             'sku' => 'nullable|string|max:100|unique:products,sku',
             'category_id' => 'required|exists:categories,id',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
             'gallery' => 'nullable|array',
-            'gallery.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'gallery.*' => 'image|mimes:jpeg,png,jpg,gif|max:5120',
             'is_featured' => 'boolean',
             'is_active' => 'boolean',
         ]);
