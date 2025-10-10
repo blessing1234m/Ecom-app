@@ -10,9 +10,9 @@
                 @foreach ($banners as $banner)
                     <div class="swiper-slide h-[420px] relative">
                         @if ($banner->image)
-                            <img src="{{ Storage::url($banner->image) }}"
-                                 alt="{{ $banner->title }}"
-                                 class="absolute inset-0 w-full h-full object-cover object-center z-0" />
+                       <img src="{{ Storage::url($banner->image) }}"
+                           alt="{{ $banner->title }}"
+                           class="absolute inset-0 w-full h-full object-cover z-0" />
                         @else
                             <div class="absolute inset-0 bg-gray-200"></div>
                         @endif
