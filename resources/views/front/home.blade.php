@@ -4,7 +4,7 @@
 
 @section('content')
     <!-- Bannière Slideshow centrée et limitée en largeur -->
-    <section class="relative h-[420px] overflow-hidden max-w-8xl mx-auto my-8 rounded-xl shadow-lg border-4 ">
+    <section class="relative h-[420px] overflow-hidden max-w-7xl mx-auto my-8 rounded-xl shadow-lg border-4 ">
         <div class="swiper banner-swiper h-full">
             <div class="swiper-wrapper">
                 @foreach ($banners as $banner)
@@ -39,24 +39,16 @@
     </section>
 
     <!-- Catégories -->
-    <section class="container mx-auto px-4 py-12">
+    <section class="container mx-auto px-4 py-6 ">
         {{-- <h2 class="text-3xl font-bold text-center mb-8 ">Catégories</h2> --}}
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="flex flex-wrap justify-center gap-3 py-2">
             @foreach ($categories as $category)
                 <a href="{{ route('products.index', ['category' => $category->slug]) }}"
-                    class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition group">
-                    <div class="h-32 bg-gray-200 flex items-center justify-center group-hover:bg-gray-300 transition">
-                        @if ($category->image)
-                            <img src="{{ Storage::url($category->image) }}" alt="{{ $category->name }}"
-                                class="h-full w-full object-cover">
-                        @else
-                            <span class="text-gray-500">{{ $category->name }}</span>
-                        @endif
-                    </div>
-                    <div class="p-4 text-center">
-                        <h3 class="font-semibold text-gray-800">{{ $category->name }}</h3>
-                        <p class="text-sm text-gray-600 mt-1">{{ $category->products_count }} produits</p>
-                    </div>
+                   class="flex items-center px-4 py-2 bg-gray-100 rounded-full text-gray-700 font-medium shadow-sm hover:bg-gray-200 transition">
+                    {{ $category->name }}
+                    <svg class="w-4 h-4 ml-2 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                    </svg>
                 </a>
             @endforeach
         </div>
@@ -66,7 +58,7 @@
     <section class="container mx-auto px-4 py-12 bg-gray-50">
         <h2 class="text-3xl font-bold text-center mb-8">Produits Populaires</h2>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
             @foreach ($featuredProducts as $product)
                 <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition">
                     <div class="relative">
@@ -91,6 +83,14 @@
                                 {{ $product->name }}
                             </a>
                         </h3>
+                                                <div class="flex items-center mb-2">
+                            @for ($i = 1; $i <= 5; $i++)
+                                <svg class="w-5 h-5 {{ $i <= 5 ? 'text-green-500' : 'text-gray-300' }}" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.175c.969 0 1.371 1.24.588 1.81l-3.38 2.455a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.38-2.454a1 1 0 00-1.175 0l-3.38 2.454c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.175a1 1 0 00.95-.69l1.286-3.967z" />
+                                </svg>
+                            @endfor
+                            <span class="ml-2 text-green-700 text-sm font-medium">({{ $product->stock }})</span>
+                        </div>
                         <p class="text-gray-600 text-sm mb-4 line-clamp-2">{{ Str::limit($product->description, 80) }}</p>
                         <div class="flex justify-between items-center">
                             <div class="flex items-center space-x-2">
@@ -131,7 +131,7 @@
             <h2 class="text-3xl font-bold text-orange-500 mb-4">FAQ</h2>
             <h3 class="text-4xl font-bold text-gray-900 mb-6">Vous avez une question?<br>nous avons la réponse</h3>
             <p class="text-lg text-gray-700 mb-8">
-                Nous savons que vous avez des question pertinentes concernant nos produits et services, pour cela nous avons pioché pour vous les plus essentielles pour vous, ou sinon vous pourrez toujours nous envoyer la vôtre par courriel.
+                Nous savons que vous avez des questions pertinentes concernant nos produits et services, pour cela nous avons pioché pour vous les plus essentielles pour vous, ou sinon vous pourrez toujours nous envoyer la vôtre par courriel.
             </p>
             {{-- <a href="mailto:contact@ecom-app.tg"
                class="inline-flex items-center justify-center px-8 py-4 bg-orange-500 text-white text-xl font-semibold rounded-lg hover:bg-orange-600 transition">

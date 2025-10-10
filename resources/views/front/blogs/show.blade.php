@@ -9,7 +9,9 @@
             class="mx-auto mb-6 rounded-lg"
             style="width:600px;height:500px;object-fit:cover;display:block;">
     @endif
-    <h1 class="text-3xl font-bold mb-6">{{ $blog->title }}</h1>
+    <pre class="text-3xl font-bold mb-6" style="background:none;border:none;padding:0;font-family:inherit;white-space:pre-wrap;word-break:break-word;">
+{{ $blog->title }}
+    </pre>
                     <p class="text-gray-500 text-sm mb-1">
                     {{-- <span>{{ $blog->author ?? 'Admin' }}</span>
                     <span class="mx-2">•</span> --}}

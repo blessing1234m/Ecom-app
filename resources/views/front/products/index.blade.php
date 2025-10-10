@@ -30,7 +30,8 @@
                         @foreach($categories as $category)
                         <a href="{{ route('products.index', ['category' => $category->slug]) }}"
                            class="block text-gray-600 hover:text-primary-600 transition {{ request('category') == $category->slug ? 'text-primary-600 font-medium' : '' }}">
-                            {{ $category->name }} ({{ $category->products_count }})
+                            {{ $category->name }}
+                            {{-- ({{$category->products_count}}) --}}
                         </a>
                         @endforeach
                     </div>
@@ -96,7 +97,7 @@
 
             <!-- Products -->
             @if($products->count() > 0)
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 @foreach($products as $product)
                 <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition">
                     <div class="relative">
@@ -120,11 +121,19 @@
                         <div class="mb-2">
                             <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">{{ $product->category->name }}</span>
                         </div>
-                        <h3 class="text-lg font-semibold mb-2">
+                        <h3 class="text-lg font-semibold mb-1">
                             <a href="{{ route('products.show', $product->slug) }}" class="hover:text-primary-600 transition">
                                 {{ $product->name }}
                             </a>
                         </h3>
+                        <div class="flex items-center mb-2">
+                            @for ($i = 1; $i <= 5; $i++)
+                                <svg class="w-5 h-5 {{ $i <= 5 ? 'text-green-500' : 'text-gray-300' }}" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.175c.969 0 1.371 1.24.588 1.81l-3.38 2.455a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.38-2.454a1 1 0 00-1.175 0l-3.38 2.454c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.175a1 1 0 00.95-.69l1.286-3.967z" />
+                                </svg>
+                            @endfor
+                            <span class="ml-2 text-green-700 text-sm font-medium">({{ $product->stock }})</span>
+                        </div>
                         <p class="text-gray-600 text-sm mb-4 line-clamp-2">{{ Str::limit($product->description, 80) }}</p>
                         <div class="flex justify-between items-center">
                             <div class="flex items-center space-x-2">

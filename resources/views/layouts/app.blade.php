@@ -32,18 +32,18 @@
                 <!-- Navigation Desktop -->
                 <nav class="hidden md:flex space-x-8">
                     <a href="{{ route('home') }}"
-                        class="text-black font-semibold  hover:text-primary-600 transition {{ request()->routeIs('home') ? 'text-primary font-bold' : '' }}">ACCUEIL</a>
+                        class="text-black font-semibold hover:text-primary-600 transition {{ request()->routeIs('home') ? 'text-primary-600 underline underline-offset-4 font-bold' : '' }}">ACCUEIL</a>
                     <a href="{{ route('products.index') }}"
-                        class="text-black font-semibold hover:text-primary-600 transition {{ request()->routeIs('products.*') ? 'text-primary font-bold' : '' }}">BOUTIQUE</a>
+                        class="text-black font-semibold hover:text-primary-600 transition {{ request()->routeIs('products.*') ? 'text-primary-600 underline underline-offset-4 font-bold' : '' }}">BOUTIQUE</a>
                     <a href="{{ route('blogs.index') }}"
-                        class="text-black font-semibold hover:text-primary-600 transition {{ request()->routeIs('blogs.*') ? 'text-primary font-bold' : '' }}">BLOG</a>
+                        class="text-black font-semibold hover:text-primary-600 transition {{ request()->routeIs('blogs.*') ? 'text-primary-600 underline underline-offset-4 font-bold' : '' }}">BLOG</a>
                     {{-- <a href="{{ route('cart.index') }}"
                         class="text-black font-semibold hover:text-primary-600 transition {{ request()->routeIs('cart.*') ? 'text-primary font-bold' : '' }}">VOTRE
                         PANNIER</a> --}}
                 </nav>
 
                 <!-- Barre de recherche - Desktop -->
-                <div class="hidden md:flex flex-1 max-w-lg mx-8">
+                <div class="hidden md:flex flex-1 max-w-xs mx-4">
                     <form action="{{ route('products.index') }}" method="GET" class="w-full">
                         <div class="relative">
                             <input type="text" name="search" value="{{ request('search') }}"

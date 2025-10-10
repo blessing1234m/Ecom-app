@@ -48,7 +48,7 @@
             </ol>
         </nav>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
             <!-- Product Images -->
             <div>
                 <!-- Main Image -->
@@ -66,19 +66,43 @@
                 <!-- Gallery -->
                 @if ($product->gallery && count($product->gallery) > 0)
                     <div class="grid grid-cols-4 gap-2">
-                        <div class="cursor-pointer border-2 border-primary-500 rounded">
+                        <div class="cursor-pointer border-2 border-primary-500 rounded gallery-thumb-wrapper active-thumb">
                             <img src="{{ Storage::url($product->image) }}" alt="{{ $product->name }}"
-                                class="h-20 w-full object-cover"
-                                onclick="changeMainImage('{{ Storage::url($product->image) }}')">
+                                class="h-20 w-full object-cover gallery-thumb"
+                                data-img="{{ Storage::url($product->image) }}">
                         </div>
                         @foreach ($product->gallery as $image)
-                            <div class="cursor-pointer border border-gray-200 rounded hover:border-primary-500 transition">
+                            <div class="cursor-pointer border border-gray-200 rounded hover:border-primary-500 transition gallery-thumb-wrapper">
                                 <img src="{{ Storage::url($image) }}" alt="{{ $product->name }}"
-                                    class="h-20 w-full object-cover"
-                                    onclick="changeMainImage('{{ Storage::url($image) }}')">
+                                    class="h-20 w-full object-cover gallery-thumb"
+                                    data-img="{{ Storage::url($image) }}">
                             </div>
                         @endforeach
                     </div>
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.gallery-thumb').forEach(function(thumb) {
+            thumb.addEventListener('click', function() {
+                var main = document.getElementById('mainImage');
+                if(main && this.dataset.img) {
+                    main.src = this.dataset.img;
+                }
+                // Gestion du contour bleu
+                document.querySelectorAll('.gallery-thumb-wrapper').forEach(function(wrapper) {
+                    wrapper.classList.remove('border-2', 'border-primary-500', 'active-thumb');
+                    wrapper.classList.add('border', 'border-gray-200');
+                });
+                var parent = this.closest('.gallery-thumb-wrapper');
+                if(parent) {
+                    parent.classList.remove('border', 'border-gray-200');
+                    parent.classList.add('border-2', 'border-primary-500', 'active-thumb');
+                }
+            });
+        });
+    });
+</script>
+@endpush
                 @endif
             </div>
 
