@@ -55,4 +55,17 @@ class Order extends Model
             default => 'bg-gray-100 text-gray-800',
         };
     }
+
+    public function getStatusLabelAttribute()
+    {
+        return match($this->status) {
+            'pending' => 'En attente',
+            'confirmed' => 'Confirmée',
+            'processing' => 'En traitement',
+            'shipped' => 'Expédiée',
+            'delivered' => 'Livrée',
+            'cancelled' => 'Annulée',
+            default => $this->status,
+        };
+    }
 }

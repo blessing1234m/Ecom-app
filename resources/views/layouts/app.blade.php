@@ -64,24 +64,29 @@
                 <div class="flex items-center space-x-4">
                     <!-- Icône Recherche - Mobile -->
                     <button type="button"
-                            class="md:hidden text-gray-600 hover:text-primary-600 transition mobile-search-button">
+                        class="md:hidden text-gray-600 hover:text-primary-600 transition mobile-search-button">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                     </button>
 
                     <!-- Icône Panier -->
-                    <a href="{{ route('cart.index') }}" class="relative text-gray-600 hover:text-primary-600 transition">
+                    <a href="{{ route('cart.index') }}"
+                        class="relative text-gray-600 hover:text-primary-600 transition">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                         </svg>
-                        <span class="absolute -top-2 -right-2 bg-primary-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center cart-count">0</span>
+                        <span
+                            class="absolute -top-2 -right-2 bg-primary-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center cart-count">0</span>
                     </a>
 
                     <!-- Bouton Menu Mobile -->
                     <button type="button" class="md:hidden text-gray-600 mobile-menu-button">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                     </button>
                 </div>
@@ -91,15 +96,14 @@
             <div class="md:hidden mobile-search hidden mt-4 pb-2">
                 <form action="{{ route('products.index') }}" method="GET" class="w-full">
                     <div class="relative">
-                        <input type="text"
-                               name="search"
-                               value="{{ request('search') }}"
-                               placeholder="Rechercher un produit..."
-                               class="w-full pl-4 pr-10 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                        <input type="text" name="search" value="{{ request('search') }}"
+                            placeholder="Rechercher un produit..."
+                            class="w-full pl-4 pr-10 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
                         <button type="submit"
-                                class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-primary-600 transition">
+                            class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-primary-600 transition">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
                         </button>
                     </div>
@@ -112,11 +116,11 @@
     <div class="mobile-menu md:hidden hidden mt-2 bg-white rounded-lg shadow-lg py-4 px-6 absolute left-0 right-0 z-40">
         <nav class="flex flex-col space-y-4">
             <a href="{{ route('home') }}"
-               class="text-black font-bold hover:text-primary-600 transition {{ request()->routeIs('home') ? 'text-primary font-bold' : '' }}">ACCUEIL</a>
+                class="text-black font-bold hover:text-primary-600 transition {{ request()->routeIs('home') ? 'text-primary font-bold' : '' }}">ACCUEIL</a>
             <a href="{{ route('products.index') }}"
-               class="text-black font-bold hover:text-primary-600 transition {{ request()->routeIs('products.*') ? 'text-primary font-bold' : '' }}">BOUTIQUE</a>
+                class="text-black font-bold hover:text-primary-600 transition {{ request()->routeIs('products.*') ? 'text-primary font-bold' : '' }}">BOUTIQUE</a>
             <a href="{{ route('blogs.index') }}"
-               class="text-black font-bold hover:text-primary-600 transition {{ request()->routeIs('blogs.*') ? 'text-primary font-bold' : '' }}">BLOG</a>
+                class="text-black font-bold hover:text-primary-600 transition {{ request()->routeIs('blogs.*') ? 'text-primary font-bold' : '' }}">BLOG</a>
             {{-- <a href="{{ route('cart.index') }}"
                class="text-black font-bold hover:text-primary-600 transition {{ request()->routeIs('cart.*') ? 'text-primary font-bold' : '' }}">VOTRE PANNIER</a> --}}
         </nav>
@@ -138,10 +142,13 @@
                 <div>
                     <h3 class="text-lg font-semibold mb-4 text-orange-500">Liens Rapides</h3>
                     <ul class="space-y-2">
-                        <li><a href="{{ route('home') }}" class="text-gray-300 hover:text-white transition">Accueil</a>
+                        <li><a href="{{ route('home') }}"
+                                class="text-gray-300 hover:text-white transition">Accueil</a>
                         </li>
                         <li><a href="{{ route('products.index') }}"
-                                class="text-gray-300 hover:text-white transition">Produits</a></li>
+                                class="text-gray-300 hover:text-white transition">Boutique</a></li>
+                        <li><a href="{{ route('blogs.index') }}"
+                                class="text-gray-300 hover:text-white transition">Blog</a></li>
                     </ul>
                 </div>
                 <div>
@@ -169,7 +176,7 @@
             document.querySelector('.mobile-search').classList.add('hidden');
         });
 
-                // Toggle Recherche Mobile
+        // Toggle Recherche Mobile
         document.querySelector('.mobile-search-button')?.addEventListener('click', function() {
             document.querySelector('.mobile-search').classList.toggle('hidden');
             document.querySelector('.mobile-menu').classList.add('hidden');

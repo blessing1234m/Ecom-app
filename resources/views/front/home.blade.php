@@ -4,11 +4,11 @@
 
 @section('content')
     <!-- Bannière Slideshow centrée et limitée en largeur -->
-    <section class="relative h-[420px] overflow-hidden max-w-7xl mx-auto my-8 rounded-xl shadow-lg border-4 ">
+    <section class="relative h-[400px] overflow-hidden max-w-7xl mx-auto my-4 rounded-xl shadow-lg border-4 ">
         <div class="swiper banner-swiper h-full">
             <div class="swiper-wrapper">
                 @foreach ($banners as $banner)
-                    <div class="swiper-slide h-[420px] relative">
+                    <div class="swiper-slide h-[400px] relative">
                         @if ($banner->image)
                        <img src="{{ Storage::url($banner->image) }}"
                            alt="{{ $banner->title }}"
@@ -39,33 +39,33 @@
     </section>
 
     <!-- Catégories -->
-    <section class="container mx-auto px-4 py-6 ">
+    <section class="container mx-auto px-4 py-2 ">
         {{-- <h2 class="text-3xl font-bold text-center mb-8 ">Catégories</h2> --}}
         <div class="flex flex-wrap justify-center gap-3 py-2">
             @foreach ($categories as $category)
                 <a href="{{ route('products.index', ['category' => $category->slug]) }}"
-                   class="flex items-center px-4 py-2 bg-gray-100 rounded-full text-gray-700 font-medium shadow-sm hover:bg-gray-200 transition">
+                   class="flex items-center px-4 py-1 bg-green-100 rounded-full text-gray-700 font-medium shadow-sm hover:bg-green-200 transition hover:scale-105 transition duration-300">
                     {{ $category->name }}
-                    <svg class="w-4 h-4 ml-2 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    {{-- <svg class="w-4 h-4 ml-2 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-                    </svg>
+                    </svg> --}}
                 </a>
             @endforeach
         </div>
     </section>
 
     <!-- Produits Populaires -->
-    <section class="container mx-auto px-4 py-12 bg-gray-50">
+    <section class="container mx-auto px-4 py-8 bg-gray-50">
         <h2 class="text-3xl font-bold text-center mb-8">Produits Populaires</h2>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
             @foreach ($featuredProducts as $product)
-                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
                     <div class="relative">
                         <div class="h-48 bg-gray-200 flex items-center justify-center">
                             @if ($product->image)
                                 <img src="{{ Storage::url($product->image) }}" alt="{{ $product->name }}"
-                                    class="h-full w-full object-cover">
+                                    class="h-full w-full object-cover hover:scale-105 transition duration-300">
                             @else
                                 <span class="text-gray-500">Image non disponible</span>
                             @endif

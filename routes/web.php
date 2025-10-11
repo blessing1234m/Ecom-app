@@ -64,9 +64,9 @@ Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.sh
 // Routes Admin
 Route::prefix('admin')->name('admin.')->group(function () {
     // Auth routes accessibles sans authentification
-    Route::get('/login', [AuthController::class, 'login'])->name('login');
-    Route::post('/login', [AuthController::class, 'authenticate'])->name('authenticate');
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/auth/login', [AuthController::class, 'login'])->name('login');
+    Route::post('auth//login', [AuthController::class, 'authenticate'])->name('authenticate');
+    Route::post('/auth/logout', [AuthController::class, 'logout'])->name('logout');
 
     // Routes protégées
     Route::middleware('admin')->group(function () {

@@ -2,12 +2,31 @@
 
 @section('title', 'Produits - Ecom-App')
 
+@push('styles')
+<style>
+    #filterSidebar {
+        transition: max-height 0.3s ease-in-out;
+        overflow: hidden;
+    }
+</style>
+@endpush
+
 @section('content')
 <div class="container mx-auto px-4 py-8">
     <div class="flex flex-col lg:flex-row gap-8">
+        <!-- Mobile Filter Toggle Button -->
+        <div class="lg:hidden mb-4">
+            <button id="filterToggle" class="w-full bg-white text-gray-800 px-4 py-2 rounded-lg shadow-md flex items-center justify-between">
+                <span class="font-medium">Filtres</span>
+                <svg class="w-5 h-5 transform transition-transform duration-200" id="filterIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+            </button>
+        </div>
+
         <!-- Sidebar Filters -->
         <div class="lg:w-1/4">
-            <div class="bg-white rounded-lg shadow-md p-6 sticky top-24">
+            <div id="filterSidebar" class="bg-white rounded-lg shadow-md p-6 sticky top-24 hidden lg:block">
                 <h3 class="text-lg font-semibold mb-4">Filtres</h3>
 
                 <!-- Search -->
@@ -127,11 +146,11 @@
                             </a>
                         </h3>
                         <div class="flex items-center mb-2">
-                            @for ($i = 1; $i <= 5; $i++)
+                            {{-- @for ($i = 1; $i <= 5; $i++)
                                 <svg class="w-5 h-5 {{ $i <= 5 ? 'text-green-500' : 'text-gray-300' }}" fill="currentColor" viewBox="0 0 20 20">
                                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.175c.969 0 1.371 1.24.588 1.81l-3.38 2.455a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.38-2.454a1 1 0 00-1.175 0l-3.38 2.454c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.175a1 1 0 00.95-.69l1.286-3.967z" />
                                 </svg>
-                            @endfor
+                            @endfor --}}
                             <span class="ml-2 text-green-700 text-sm font-medium">({{ $product->stock }})</span>
                         </div>
                         <p class="text-gray-600 text-sm mb-4 line-clamp-2">{{ Str::limit($product->description, 80) }}</p>
@@ -180,6 +199,25 @@
 
 @push('scripts')
 <script>
+    // Filter toggle functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterToggle = document.getElementById('filterToggle');
+        const filterSidebar = document.getElementById('filterSidebar');
+        const filterIcon = document.getElementById('filterIcon');
+
+        filterToggle.addEventListener('click', function() {
+            filterSidebar.classList.toggle('hidden');
+            filterIcon.classList.toggle('rotate-180');
+
+            // Animation
+            if (!filterSidebar.classList.contains('hidden')) {
+                filterSidebar.style.maxHeight = filterSidebar.scrollHeight + "px";
+            } else {
+                filterSidebar.style.maxHeight = "0";
+            }
+        });
+    });
+
     document.querySelectorAll('.add-to-cart').forEach(button => {
         button.addEventListener('click', function() {
             const productId = this.dataset.productId;
@@ -198,7 +236,7 @@
             .then(data => {
                 if (data.success) {
                     updateCartCount();
-                    showNotification('Produit ajouté au panier !', 'success');
+                    //showNotification('Produit ajouté au panier !', 'success');
                 }
             });
         });
