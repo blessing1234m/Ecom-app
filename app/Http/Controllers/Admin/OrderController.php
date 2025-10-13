@@ -41,7 +41,22 @@ class OrderController extends Controller
 
         return view('admin.orders.index', compact('orders', 'orderStats'));
     }
-
+    /**
+     * Retourne la dernière commande créée (pour AJAX admin)
+     */
+    public function latestCreated()
+    {
+        $order = \App\Models\Order::latest()->first();
+        if (!$order) {
+            return response()->json(['id' => null, 'order_number' => null, 'created_at' => null]);
+        }
+        return response()->json([
+            'id' => $order->id,
+            'order_number' => $order->order_number,
+            'created_at' => $order->created_at,
+            'customer_name' => $order->customer_name,
+        ]);
+    }
     public function show(Order $order): View
     {
         $order->load('items.product');
@@ -117,5 +132,21 @@ class OrderController extends Controller
         // Suppression d'un article (optionnel, à gérer côté JS ou via une case à cocher)
 
         return redirect()->route('admin.orders.show', $order)->with('success', 'Commande modifiée avec succès!');
+    }
+    /**
+     * Retourne la dernière commande confirmée (pour AJAX admin)
+     */
+    public function latestConfirmed()
+    {
+        $order = \App\Models\Order::where('status', 'confirmed')->latest()->first();
+        if (!$order) {
+            return response()->json(['id' => null, 'order_number' => null, 'created_at' => null]);
+        }
+        return response()->json([
+            'id' => $order->id,
+            'order_number' => $order->order_number,
+            'created_at' => $order->created_at,
+            'customer_name' => $order->customer_name,
+        ]);
     }
 }

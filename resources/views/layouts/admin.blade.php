@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="300">
     <title>@yield('title', 'Admin - Ecom-App')</title>
 
     <!-- Favicon -->
@@ -213,6 +214,33 @@
     </script>
 
     @stack('scripts')
+
+    <script>
+        // Fonction de rafraîchissement automatique du contenu
+        function setupAutoRefresh() {
+            const mainContent = document.querySelector('main');
+            const refreshInterval = 60000; // Rafraîchissement toutes les 60 secondes
+
+            setInterval(async () => {
+                try {
+                    const response = await fetch(window.location.href);
+                    const text = await response.text();
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(text, 'text/html');
+                    const newContent = doc.querySelector('main');
+
+                    if (newContent && mainContent) {
+                        mainContent.innerHTML = newContent.innerHTML;
+                    }
+                } catch (error) {
+                    console.error('Erreur lors du rafraîchissement:', error);
+                }
+            }, refreshInterval);
+        }
+
+        // Initialiser le rafraîchissement automatique
+        document.addEventListener('DOMContentLoaded', setupAutoRefresh);
+    </script>
 </body>
 
 </html>
