@@ -56,6 +56,23 @@ class ProfileController extends Controller
     }
 
     /**
+     * Update the admin's email.
+     */
+    public function updateEmail(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'email' => ['required', 'email', 'unique:admins,email'],
+        ]);
+
+        $admin = $request->user('admin');
+        $admin->update([
+            'email' => $request->email,
+        ]);
+
+        return Redirect::route('admin.dashboard')->with('success', 'Email updated successfully!');
+    }
+
+    /**
      * Delete the user's account.
      */
     public function destroy(Request $request): RedirectResponse
