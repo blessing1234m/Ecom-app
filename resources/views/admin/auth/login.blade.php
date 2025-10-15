@@ -1,6 +1,40 @@
-<!DOCTYPE html>
+@extends('layouts.admincopy')
+
+@section('title', 'Admin - Connexion')
+
+@section('content')
+    <div class="max-w-md mx-auto bg-white p-8 rounded shadow">
+        <h2 class="text-2xl font-semibold mb-6">Connexion Admin</h2>
+
+        @if ($errors->any())
+            <div class="mb-4 text-red-600">
+                {{ $errors->first() }}
+            </div>
+        @endif
+
+        <form method="POST" action="{{ route('admin.authenticate') }}">
+            @csrf
+
+            <div class="mb-4">
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input id="email" name="email" type="email" required autofocus class="mt-1 block w-full rounded border-gray-300" value="{{ old('email') }}">
+            </div>
+
+            <div class="mb-4">
+                <label for="password" class="block text-sm font-medium text-gray-700">Mot de passe</label>
+                <input id="password" name="password" type="password" required class="mt-1 block w-full rounded border-gray-300">
+            </div>
+
+            <div class="flex justify-end">
+                <button type="submit" class="px-4 py-2 bg-orange-600 text-white rounded">Se connecter</button>
+            </div>
+        </form>
+    </div>
+@endsection
+
+{{-- <!DOCTYPE html>
 <html lang="fr">
-<head>
+{{-- <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion Admin - Ecom-App</title>
@@ -8,7 +42,7 @@
     <!-- Vite CSS -->
     @vite(['resources/css/app.css'])
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+{{-- <body class="bg-gray-100 min-h-screen flex items-center justify-center">
     <div class="max-w-sm w-full space-y-4">
         <div>
             <div class="flex justify-center">
@@ -52,10 +86,10 @@
                 </button>
             </div>
 
-            {{-- <div class="text-center text-sm text-gray-500">
+             <div class="text-center text-sm text-gray-500">
                 <p>Mot de passe temporaire: <code>admin1234</code></p>
-            </div> --}}
+            </div>
         </form>
     </div>
 </body>
-</html>
+</html> --}}

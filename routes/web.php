@@ -1,5 +1,4 @@
 <?php
-namespace App\Http\Controllers\Admin;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\ProductController;
@@ -66,13 +65,30 @@ Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.sh
 
 // Routes Admin
 Route::prefix('admin')->name('admin.')->group(function () {
-    // Auth routes accessibles sans authentification
-    Route::get('/auth/login', [AuthController::class, 'login'])->name('login');
-    Route::post('auth//login', [AuthController::class, 'authenticate'])->name('authenticate');
-    Route::post('/auth/logout', [AuthController::class, 'logout'])->name('logout');
+    // Auth routes accessibles sans authentification (Breeze-style admin)
+    Route::get('/auth/login', [\App\Http\Controllers\Admin\Auth\AuthenticatedSessionController::class, 'create'])->name('login');
+    Route::post('/auth/login', [\App\Http\Controllers\Admin\Auth\AuthenticatedSessionController::class, 'store'])->name('authenticate');
+    Route::post('/auth/logout', [\App\Http\Controllers\Admin\Auth\AuthenticatedSessionController::class, 'destroy'])->name('logout');
+    // Registration (optional)
+    Route::get('/auth/register', [\App\Http\Controllers\Admin\Auth\RegisteredUserController::class, 'create'])->name('register');
+    Route::post('/auth/register', [\App\Http\Controllers\Admin\Auth\RegisteredUserController::class, 'store'])->name('register.store');
+
+    // Password reset for admins
+    Route::get('/auth/forgot-password', [\App\Http\Controllers\Admin\Auth\PasswordResetLinkController::class, 'create'])->name('password.request');
+    Route::post('/auth/forgot-password', [\App\Http\Controllers\Admin\Auth\PasswordResetLinkController::class, 'store'])->name('password.email');
+    Route::get('/auth/reset-password/{token}', [\App\Http\Controllers\Admin\Auth\NewPasswordController::class, 'create'])->name('password.reset');
+    Route::post('/auth/reset-password', [\App\Http\Controllers\Admin\Auth\NewPasswordController::class, 'store'])->name('password.update');
 
     // Routes protégées
     Route::middleware('admin')->group(function () {
+        // Email verification
+        Route::get('/email/verify', [\App\Http\Controllers\Admin\Auth\EmailVerificationPromptController::class, '__invoke'])->name('verification.notice');
+        Route::post('/email/verification-notification', [\App\Http\Controllers\Admin\Auth\EmailVerificationNotificationController::class, 'store'])->name('verification.send');
+        Route::get('/email/verify/{id}/{hash}', [\App\Http\Controllers\Admin\Auth\VerifyEmailController::class, '__invoke'])->middleware(['signed','throttle:6,1'])->name('verification.verify');
+
+        // Confirm password
+        Route::get('/confirm-password', [\App\Http\Controllers\Admin\Auth\ConfirmablePasswordController::class, 'show'])->name('password.confirm');
+        Route::post('/confirm-password', [\App\Http\Controllers\Admin\Auth\ConfirmablePasswordController::class, 'store']);
     // API AJAX : dernière commande créée
     Route::get('/orders/latest', [AdminOrderController::class, 'latestCreated'])->name('orders.latest');
         // Dashboard
@@ -144,3 +160,7 @@ Route::get('/orders/{order}/pdf/view', [OrderPdfController::class, 'view'])->nam
 // Blog public routes
 Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
 Route::get('/blogs/{blog}', [BlogController::class, 'show'])->name('blogs.show');
+
+// Route pour la mise à jour du mot de passe
+Route::put('password', [\App\Http\Controllers\ProfileController::class, 'updatePassword'])->name('password.update');
+

@@ -105,7 +105,7 @@
                             @include('components.add-to-cart-button', [
                                 'productId' => $product->id,
                                 'class' =>
-                                    'bg-primary-500 text-white px-4 py-2 rounded hover:bg-primary-600 transition',
+                                    'bg-primary-600 text-white px-4 py-2 rounded hover:bg-primary-600 transition',
                                 'text' => 'Ajouter',
                             ])
                         </div>
