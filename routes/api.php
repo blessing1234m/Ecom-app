@@ -14,6 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+
+    // Routes pour les notifications admin
+    Route::prefix('admin/notifications')->group(function () {
+        Route::get('/', 'App\Http\Controllers\Admin\NotificationController@index');
+        Route::post('/{id}/mark-as-read', 'App\Http\Controllers\Admin\NotificationController@markAsRead');
+        Route::post('/mark-all-as-read', 'App\Http\Controllers\Admin\NotificationController@markAllAsRead');
+    });
 });

@@ -27,7 +27,17 @@ class OrderCreatedNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['broadcast'];
+    }
+
+    /**
+     * Get the broadcastable representation of the notification.
+     */
+    public function toBroadcast($notifiable)
+    {
+        return [
+            'message' => 'Nouvelle commande ! Client: ' . $this->order->customer_name . ', Montant: ' . $this->order->total_amount . ' €'
+        ];
     }
 
     /**

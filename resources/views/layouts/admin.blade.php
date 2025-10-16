@@ -211,7 +211,7 @@
     @endauth
 
     <!-- Vite JS -->
-    @vite(['resources/js/app.js'])
+    @vite(['resources/js/app.js', 'resources/js/admin-notifications.js'])
 
     <script>
         // Mobile Menu Toggle
@@ -247,6 +247,10 @@
 
         // Initialiser le rafraîchissement automatique
         document.addEventListener('DOMContentLoaded', setupAutoRefresh);
+    </script>
+
+    <script>
+        window.adminId = {{ auth()->id() }};
     </script>
 </body>
 
