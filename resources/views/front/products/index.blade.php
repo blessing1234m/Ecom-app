@@ -34,7 +34,7 @@
                     <form action="{{ route('products.index') }}" method="GET">
                         <input type="text" name="search" value="{{ request('search') }}"
                                placeholder="Rechercher..."
-                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500">
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-600">
                     </form>
                 </div>
 
@@ -72,7 +72,7 @@
                             <input type="number" name="max_price" value="{{ request('max_price') }}"
                                    placeholder="Max" class="w-1/2 px-2 py-1 border border-gray-300 rounded text-sm">
                         </div>
-                        <button type="submit" class="w-full bg-primary-500 text-white py-2 rounded hover:bg-primary-600 transition text-sm">
+                        <button type="submit" class="w-full bg-primary-600 text-white py-2 rounded hover:bg-primary-600 transition text-sm">
                             Appliquer
                         </button>
                     </form>
@@ -105,7 +105,7 @@
                     <input type="hidden" name="search" value="{{ request('search') }}">
                     @endif
                     <select name="sort" onchange="this.form.submit()"
-                            class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500">
+                            class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-600">
                         <option value="latest" {{ request('sort') == 'latest' ? 'selected' : '' }}>Nouveautés</option>
                         <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>Prix croissant</option>
                         <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>Prix décroissant</option>
@@ -161,7 +161,7 @@
                                 <span class="text-gray-400 text-sm line-through">{{ number_format($product->compare_price, 0, ',', ' ') }} FCFA</span>
                                 @endif
                             </div>
-                            <button class="add-to-cart bg-primary-500 text-white px-4 py-2 rounded hover:bg-primary-600 transition"
+                            <button class="add-to-cart bg-primary-600 text-white px-4 py-2 rounded hover:bg-primary-600 transition"
                                     data-product-id="{{ $product->id }}"
                                     data-product-name="{{ $product->name }}"
                                     data-product-price="{{ $product->price }}"
@@ -187,7 +187,7 @@
                 </div>
                 <h3 class="text-lg font-medium text-gray-900 mb-2">Aucun produit trouvé</h3>
                 <p class="text-gray-500 mb-4">Essayez de modifier vos critères de recherche.</p>
-                <a href="{{ route('products.index') }}" class="inline-block bg-primary-500 text-white px-6 py-2 rounded hover:bg-primary-600 transition">
+                <a href="{{ route('products.index') }}" class="inline-block bg-primary-600 text-white px-6 py-2 rounded hover:bg-primary-600 transition">
                     Voir tous les produits
                 </a>
             </div>

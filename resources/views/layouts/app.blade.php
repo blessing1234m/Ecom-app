@@ -32,11 +32,11 @@
                 <!-- Navigation Desktop -->
                 <nav class="hidden md:flex space-x-8">
                     <a href="{{ route('home') }}"
-                        class="text-black font-semibold hover:text-primary-600 transition {{ request()->routeIs('home') ? 'text-primary-600 underline underline-offset-4 font-bold' : '' }}">ACCUEIL</a>
+                        class="text-black font-semibold bg-gray-100 px-6 py-2 rounded-full hover:text-primary-600 transition {{ request()->routeIs('home') ? 'text-primary-600  font-bold' : '' }}">ACCUEIL</a>
                     <a href="{{ route('products.index') }}"
-                        class="text-black font-semibold hover:text-primary-600 transition {{ request()->routeIs('products.*') ? 'text-primary-600 underline underline-offset-4 font-bold' : '' }}">BOUTIQUE</a>
+                        class="text-black font-semibold bg-gray-100 px-6 py-2 rounded-full hover:text-primary-600 transition {{ request()->routeIs('products.*') ? 'text-primary-600  font-bold' : '' }}">BOUTIQUE</a>
                     <a href="{{ route('blogs.index') }}"
-                        class="text-black font-semibold hover:text-primary-600 transition {{ request()->routeIs('blogs.*') ? 'text-primary-600 underline underline-offset-4 font-bold' : '' }}">BLOG</a>
+                        class="text-black font-semibold bg-gray-100 px-6 py-2 rounded-full hover:text-primary-600 transition {{ request()->routeIs('blogs.*') ? 'text-primary-600  font-bold' : '' }}">BLOG</a>
                     {{-- <a href="{{ route('cart.index') }}"
                         class="text-black font-semibold hover:text-primary-600 transition {{ request()->routeIs('cart.*') ? 'text-primary font-bold' : '' }}">VOTRE
                         PANNIER</a> --}}

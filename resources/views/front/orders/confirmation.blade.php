@@ -39,10 +39,25 @@
                             <div class="flex justify-between">
                                 <dt class="text-gray-600">Statut:</dt>
                                 <dd class="font-medium">
-                                    <span
-                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $order->status_color }}">
-                                        {{ ucfirst($order->status) }}
-                                    </span>
+                                    @switch($order->status)
+                                        @case('pending')
+                                            En attente
+                                            @break
+                                        @case('processing')
+                                            En cours de traitement
+                                            @break
+                                        @case('confirmed')
+                                            Confirmée
+                                            @break
+                                        @case('shipped')
+                                            Délivrée
+                                            @break
+                                        @case('cancelled')
+                                            Annulée
+                                            @break
+                                        @default
+                                            Inconnu
+                                    @endswitch
                                 </dd>
                             </div>
                             <div class="flex justify-between">
