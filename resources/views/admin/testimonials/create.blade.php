@@ -1,4 +1,4 @@
-@extends('layouts.admincopy')
+@extends('layouts.admin')
 
 @section('title', 'Ajouter un témoignage')
 @section('content')
@@ -27,7 +27,7 @@
             <label class="block mb-1 font-medium">Photo (optionnel)</label>
             <input type="file" name="photo" accept="image/*" class="w-full">
         </div>
-        <button type="submit" class="bg-orange-500 text-white px-4 py-2 rounded">Enregistrer</button>
+        <button type="submit" class="bg-primary-500 text-white px-4 py-2 rounded">Enregistrer</button>
         <a href="{{ route('admin.testimonials.index') }}" class="ml-4 text-gray-600">Annuler</a>
     </form>
 </div>

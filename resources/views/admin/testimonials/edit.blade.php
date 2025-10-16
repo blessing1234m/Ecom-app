@@ -1,4 +1,4 @@
-@extends('layouts.admincopy')
+@extends('layouts.admin')
 
 @section('title', 'Modifier le témoignage')
 @section('content')
