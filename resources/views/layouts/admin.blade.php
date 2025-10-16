@@ -64,7 +64,7 @@
                     <div class="flex items-center">
                         <a href="{{ route('admin.dashboard') }}" class="flex items-center space-x-3">
                             <img src="{{ asset('images/logo.jpg') }}" alt="Ecom-App Logo" class="h-20 w-auto">
-                            <span class="text-xl font-bold text-gray-800">Admin</span>
+                            <span class="text-xl font-bold text-gray-800">Admin-Ecom</span>
                         </a>
                     </div>
 
@@ -135,7 +135,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                                     </svg>
-                                    Changer le mot de passe
+                                    Modifier le profil
                                 </a>
                                 <form action="{{ route('admin.logout') }}" method="POST">
                                     @csrf

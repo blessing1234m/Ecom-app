@@ -82,6 +82,7 @@
                     x-init="setTimeout(() => show = false, 2000)"
                 >{{ __('Saved.') }}</p>
             @endif
+            <a href="{{ route('admin.dashboard') }}" class="ml-4 text-gray-600">Annuler</a>
         </div>
     </form>
 </section>
