@@ -17,7 +17,7 @@ if (window.adminId) {
             // Jouer un son de notification
             const audio = new Audio('/notification.mp3');
             audio.play();
-            
+
             // Afficher une alerte avec le message
             alert(notification.message);
         });

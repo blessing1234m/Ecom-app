@@ -4,7 +4,10 @@
 
 @section('content')
     <div class="max-w-md mx-auto bg-white p-8 rounded shadow">
-        <h2 class="text-2xl font-semibold mb-6">Connexion Admin</h2>
+        <div class="flex justify-center mb-4">
+            <img src="{{ asset('images/logo.jpg') }}" alt="Ecom-App Logo" class="h-20 w-auto">
+        </div>
+        <h2 class="text-2xl font-semibold mb-6 text-center">Connexion Admin</h2>
 
         @if ($errors->any())
             <div class="mb-4 text-red-600">
@@ -26,7 +29,7 @@
             </div>
 
             <div class="flex justify-end">
-                <button type="submit" class="px-4 py-2 bg-orange-600 text-white rounded">Se connecter</button>
+                <button type="submit" class="px-4 py-2 bg-primary-600 text-white rounded">Se connecter</button>
             </div>
         </form>
     </div>

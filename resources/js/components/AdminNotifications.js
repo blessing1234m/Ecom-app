@@ -75,8 +75,8 @@ export default {
                     </button>
                 </div>
                 <div class="notifications-list">
-                    <div v-for="notification in notifications" 
-                         :key="notification.id" 
+                    <div v-for="notification in notifications"
+                         :key="notification.id"
                          class="notification-item"
                          :class="{ 'unread': !notification.read_at }">
                         <a :href="notification.data.url" @click="markAsRead(notification.id)">
