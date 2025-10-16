@@ -151,6 +151,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::put('/blogs/{blog}', [AdminblogController::class, 'update'])->name('blogs.update');
         Route::delete('/blogs/{blog}', [AdminblogController::class, 'destroy'])->name('blogs.destroy');
         Route::get('/blogs/{blog}', [AdminblogController::class, 'show'])->name('blogs.show');
+    // Testimonials Admin Routes
+    Route::resource('testimonials', \App\Http\Controllers\Admin\TestimonialController::class);
     });
 });
 

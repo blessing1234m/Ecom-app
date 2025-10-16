@@ -64,7 +64,7 @@
                     <div class="flex items-center">
                         <a href="{{ route('admin.dashboard') }}" class="flex items-center space-x-3">
                             <img src="{{ asset('images/logo.jpg') }}" alt="Ecom-App Logo" class="h-20 w-auto">
-                            <span class="text-xl font-bold text-gray-800">Ecom-App Admin</span>
+                            <span class="text-xl font-bold text-gray-800">Admin</span>
                         </a>
                     </div>
 
@@ -97,6 +97,10 @@
                         <a href="{{ route('admin.blogs.index') }}"
                             class="text-gray-600 hover:text-primary-600 transition {{ request()->routeIs('admin.blogs.*') ? 'text-primary-600 font-semibold' : '' }}">
                             Blog
+                        </a>
+                        <a href="{{ route('admin.testimonials.index') }}"
+                            class="text-gray-600 hover:text-primary-600 transition {{ request()->routeIs('admin.testimonials.*') ? 'text-primary-600 font-semibold' : '' }}">
+                            Témoignage
                         </a>
                     </nav>
 

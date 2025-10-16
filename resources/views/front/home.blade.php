@@ -159,6 +159,39 @@
                 </div>
             @endforeach
         </div>
+</div>
+    {{-- <div class="text-center mt-8">
+        <a href="{{ route('admin.testimonials.index') }}" class="inline-block bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition">
+            Voir tous les témoignages
+        </a>
+    </div> --}}
+</section>
+
+@endif
+
+<!-- Témoignages clients -->
+@if(isset($testimonials) && $testimonials->count())
+<section class="container mx-auto px-4 py-12">
+    <h2 class="text-3xl font-bold text-center mb-8 text-primary-400">_TEMOIGNAGES_</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        @foreach($testimonials as $testimonial)
+        <div class="bg-white rounded-xl shadow p-6 flex flex-col items-center text-center">
+            @if($testimonial->photo)
+                <img src="{{ asset('storage/'.$testimonial->photo) }}" alt="photo" class="h-16 w-16 rounded-full object-cover mb-3">
+            @else
+                <div class="h-16 w-16 rounded-full bg-gray-200 flex items-center justify-center mb-3">
+                    <svg class="w-8 h-8 text-gray-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/></svg>
+                </div>
+            @endif
+            <div class="flex items-center justify-center mb-2">
+                @for($i=1; $i<=5; $i++)
+                    <span class="{{ $i <= $testimonial->rating ? 'text-yellow-400' : 'text-gray-300' }} text-xl">&#9733;</span>
+                @endfor
+            </div>
+            <p class="text-gray-700 italic mb-2">"{{ $testimonial->message }}"</p>
+            <div class="font-semibold text-gray-900">{{ $testimonial->name }}</div>
+        </div>
+        @endforeach
     </div>
 </section>
 @endif
