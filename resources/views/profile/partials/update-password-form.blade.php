@@ -1,38 +1,43 @@
+@extends('layouts.admin')
+
+@section('title', 'Gestion du Profil - Admin Ecom-App')
+@section('page_title', 'Gestion du Profil')
+@section('content')
+
 <section>
-    <header>
+     <header>
         <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Update Password') }}
+            {{ __('Modifier le mot de passe') }}
         </h2>
 
         <p class="mt-1 text-sm text-gray-600">
-            {{ __('Ensure your account is using a long, random password to stay secure.') }}
+            {{ __('Assurez-vous que votre compte utilise un mot de passe long et aléatoire pour rester sécurisé.') }}
         </p>
     </header>
-
     <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
         @csrf
         @method('put')
 
         <div>
-            <x-input-label for="update_password_current_password" :value="__('Current Password')" />
+            <x-input-label for="update_password_current_password" :value="__('Mot de passe Actuel')" />
             <x-text-input id="update_password_current_password" name="current_password" type="password" class="mt-1 block w-3/4" autocomplete="current-password" />
             <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
         </div>
 
         <div>
-            <x-input-label for="update_password_password" :value="__('New Password')" />
+            <x-input-label for="update_password_password" :value="__('Nouveau Mot de passe')" />
             <x-text-input id="update_password_password" name="password" type="password" class="mt-1 block w-3/4" autocomplete="new-password" />
             <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
         </div>
 
         <div>
-            <x-input-label for="update_password_password_confirmation" :value="__('Confirm Password')" />
+            <x-input-label for="update_password_password_confirmation" :value="__('Confirmez le mot de mot de passe')" />
             <x-text-input id="update_password_password_confirmation" name="password_confirmation" type="password" class="mt-1 block w-3/4" autocomplete="new-password" />
             <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
         </div>
 <br>
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <x-primary-button>{{ __('Enregistrer') }}</x-primary-button>
 
             @if (session('status') === 'password-updated')
                 <p
@@ -43,6 +48,7 @@
                     class="text-sm text-gray-600"
                 >{{ __('Saved.') }}</p>
             @endif
+            <a href="{{ route('admin.dashboard') }}" class="ml-4 text-gray-600">Annuler</a>
         </div>
     </form>
 </section>
@@ -50,12 +56,12 @@
 <section class="bg-gray-100 p-6 rounded-lg shadow-md">
     <header>
         <h2 class="text-xl font-bold text-gray-800">
-            {{ __('Update Email') }}
+            {{ __('Modifier l\'Email') }}
         </h2>
 
-        <p class="mt-2 text-sm text-gray-600">
+        {{-- <p class="mt-2 text-sm text-gray-600">
             {{ __('Ensure your account email is up-to-date.') }}
-        </p>
+        </p> --}}
     </header>
 
     <form method="post" action="{{ route('admin.profile.update-email') }}" class="mt-6 space-y-6">
@@ -63,7 +69,7 @@
         @method('patch')
 
         <div class="mb-4">
-            <x-input-label for="update_email" :value="__('Email')" class="text-gray-700" />
+            <x-input-label for="update_email" :value="__('Nouveau Email')" class="text-gray-700" />
             <x-text-input id="update_email" name="email" type="email" class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" autocomplete="email" :value="old('email', $admin->email ?? '')" required />
             <x-input-error :messages="$errors->get('email')" class="mt-2 text-red-500" />
         </div>
@@ -86,6 +92,7 @@
         </div>
     </form>
 </section>
+@endsection
 
 <style>
 /* =========================
