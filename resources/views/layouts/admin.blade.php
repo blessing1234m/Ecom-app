@@ -177,6 +177,10 @@
                         class="text-gray-600 hover:text-primary-600 transition py-2 {{ request()->routeIs('admin.products.*') ? 'text-primary-600 font-semibold' : '' }}">
                         Produits
                     </a>
+                    <a href="{{ route('admin.categories.index') }}"
+                        class="text-gray-600 hover:text-primary-600 transition py-2 {{ request()->routeIs('admin.categories.*') ? 'text-primary-600 font-semibold' : '' }}">
+                        Categories
+                    </a>
                     <a href="{{ route('admin.orders.index') }}"
                         class="text-gray-600 hover:text-primary-600 transition py-2 {{ request()->routeIs('admin.orders.*') ? 'text-primary-600 font-semibold' : '' }}">
                         Commandes
@@ -188,6 +192,10 @@
                     <a href="{{ route('admin.blogs.index') }}"
                         class="text-gray-600 hover:text-primary-600 transition py-2 {{ request()->routeIs('admin.blogs.*') ? 'text-primary-600 font-semibold' : '' }}">
                         Blog
+                    </a>
+                    <a href="{{ route('admin.testimonials.index') }}"
+                        class="text-gray-600 hover:text-primary-600 transition py-2 {{ request()->routeIs('admin.testimonials.*') ? 'text-primary-600 font-semibold' : '' }}">
+                        Témoignages
                     </a>
                 </nav>
             </div>
