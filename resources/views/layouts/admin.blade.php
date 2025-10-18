@@ -128,6 +128,15 @@
                             <!-- Menu déroulant -->
                             <div x-show="open" @click.away="open = false"
                                 class="admin-dropdown absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200">
+                                                                <a href="{{ route('admin.profile.show') }}"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition">
+                                    <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                    </svg>
+                                    Voir le profil
+                                </a>
                                 <a href="{{ route('admin.profile.edit') }}"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition">
                                     <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor"
@@ -137,15 +146,7 @@
                                     </svg>
                                     Modifier le profil
                                 </a>
-                                {{-- <a href="{{ route('admin.profile.show') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition">
-                                    <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                    </svg>
-                                    Voir le profil
-                                </a> --}}
+
                                 <form action="{{ route('admin.logout') }}" method="POST">
                                     @csrf
                                     <button type="submit" class="text-gray-600 hover:text-primary-600 transition text-sm">

@@ -132,6 +132,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Profil admin
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::get('/profile/show', [ProfileController::class, 'show'])->name('profile.show');
         Route::post('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.update-password');
         Route::patch('/profile/email', [\App\Http\Controllers\ProfileController::class, 'updateEmail'])->name('profile.update-email');
 

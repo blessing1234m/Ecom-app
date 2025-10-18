@@ -13,7 +13,12 @@ class ProfileController extends Controller
 {
     public function edit(): View
     {
-        return view('profile.partials.update-password-form');
+        return view('admin.profile.edit');
+    }
+
+    public function show(): View
+    {
+        return view('admin.profile.show');
     }
 
     public function updatePassword(Request $request): RedirectResponse
