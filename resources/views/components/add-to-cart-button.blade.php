@@ -26,7 +26,7 @@
                 .then(data => {
                     if (data.success) {
                         updateCartCount();
-                        showNotification('Produit ajouté au panier !', 'success');
+                      //  showNotification('Produit ajouté au panier !', 'success');
                     }
                 })
                 .catch(error => {
